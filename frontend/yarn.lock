@@ -1158,6 +1158,11 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.25.tgz#f077fdc0b5d0078d30893396ff4827a13f99e817"
   integrity sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==
 
+"@radix-icons/vue@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@radix-icons/vue/-/vue-1.0.0.tgz#429450ba373e695e9b5aa028d6ca699c57bb8b1e"
+  integrity sha512-gKWWk9tTK/laDRRNe5KLLR8A0qUwx4q4+DN8Fq48hJ904u78R82ayAO3TrxbNLgyn2D0h6rRiGdLzQWj7rPcvA==
+
 "@rollup/plugin-alias@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-5.1.0.tgz#99a94accc4ff9a3483be5baeedd5d7da3b597e93"
@@ -3837,11 +3842,6 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lucide-vue-next@^0.379.0:
-  version "0.379.0"
-  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.379.0.tgz#55210fe69b27b9885bd350c5bbf07b293378ee2a"
-  integrity sha512-N+dgaDucX55x6485Fmv3Oj3CZn4NS8/DMNAfLEVdkAt3UiuVUhCLmk79kqfuylHg3+Y7msps4f3FNiWawJVHOg==
-
 magic-string-ast@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/magic-string-ast/-/magic-string-ast-0.6.1.tgz#c1e5d78b20ec920265567446181f6e5c521e8217"
@@ -5725,7 +5725,7 @@ tailwindcss-animate@^1.0.7:
   resolved "https://registry.yarnpkg.com/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz#318b692c4c42676cc9e67b19b78775742388bef4"
   integrity sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==
 
-tailwindcss@^3.4.3, tailwindcss@~3.4.3:
+tailwindcss@~3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.3.tgz#be48f5283df77dfced705451319a5dffb8621519"
   integrity sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==
