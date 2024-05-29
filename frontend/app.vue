@@ -1,12 +1,10 @@
 <template>
-  <div class="flex flex-col w-screen h-screen">
-    <Navbar />
+  <NuxtLayout>
     <NuxtPage />
-  </div>
+  </NuxtLayout>
 </template>
 
 <script>
-import Navbar from "~/components/Navbar.vue";
 export default {
   name: "App",
 };
