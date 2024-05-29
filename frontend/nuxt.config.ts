@@ -1,14 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ["~/main.css"],
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
+  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "nuxt-icon", "@pinia/nuxt"],
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -20,5 +13,7 @@ export default defineNuxtConfig({
      */
     componentDir: "./components/ui",
   },
-  modules: ["shadcn-nuxt", "nuxt-icon"],
+  pinia: {
+    storesDirs: ["./stores/**", "./custom-folder/stores/**"],
+  },
 });
