@@ -12,7 +12,7 @@ export const useStepStore = defineStore("stepStore", {
     },
     decrementStep() {
       if (this.currentStep > 0) {
-        this.currentStep++;
+        this.currentStep--;
       } else {
         return;
       }

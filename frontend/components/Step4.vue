@@ -11,7 +11,7 @@
     </div>
     <Accordion
       type="single"
-      class="w-full grid grid-cols-1 gap-4"
+      class="w-full grid grid-cols-1 gap-4 max-h-[20rem] overflow-y-auto"
       collapsible
       :default-value="defaultValue"
     >
@@ -51,7 +51,6 @@
               <p>2x R$ 5.000,00</p>
             </div>
           </div>
-          {{ item.content }}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
