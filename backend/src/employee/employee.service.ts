@@ -33,9 +33,7 @@ export class EmployeeService {
     await this.isUniqueField(data, "email");
     await this.isUniqueField(data, "cpf");
 
-    const createEmployee = await this.prisma.employee.create({ data });
-    delete createEmployee.password;
-    return createEmployee;
+    return await this.prisma.employee.create({ data });
   }
 
   async findAll() {
@@ -65,7 +63,6 @@ export class EmployeeService {
 
   async remove(id: number) {
     await this.validateId(id);
-    const removeEmployee = await this.prisma.employee.delete({ where: { id } });
-    return removeEmployee;
+    return await this.prisma.employee.delete({ where: { id } });
   }
 }
