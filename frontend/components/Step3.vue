@@ -15,20 +15,21 @@
     <div class="w-full grid grid-cols-2 my-6 gap-6">
       <div>
         <p class="font-semibold text-lg">Valor a Creditar</p>
-        <p>R$10.000,00</p>
+        <p>R${{ employee!.loanValue }}</p>
       </div>
       <div>
         <p class="font-semibold text-lg">Valor a financiar</p>
-        <p>R$10.000,00</p>
+        <p>R${{ employee!.loanValue }}</p>
       </div>
       <div>
         <p class="font-semibold text-lg">Parcelamento</p>
-        <p>2x R$ 5.000,00</p>
+        <p>{{ employee!.month }}x R$ {{ employee!.plot!.toFixed(2) }}</p>
       </div>
     </div>
   </ClientOnly>
 </template>
 
-<script>
-export default {};
+<script setup lang="ts">
+import { useEmployeeDataStore } from "~/stores/employeeOrder";
+const { employee } = useEmployeeDataStore();
 </script>

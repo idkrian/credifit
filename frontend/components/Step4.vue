@@ -36,19 +36,23 @@
           <div class="w-full grid grid-cols-2 my-6 gap-6">
             <div>
               <p class="font-semibold text-lg">Empresa</p>
-              <p>R$10.000,00</p>
-            </div>
-            <div>
-              <p class="font-semibold text-lg">Número de parcelas</p>
-              <p>R$10.000,00</p>
+              <p>Seguros Seguradora</p>
             </div>
             <div>
               <p class="font-semibold text-lg">Próximo Vencimento</p>
-              <p>2x R$ 5.000,00</p>
+              <p>12/08/2023</p>
+            </div>
+            <div>
+              <p class="font-semibold text-lg">Total Financiado</p>
+              <p>5.000,00</p>
             </div>
             <div>
               <p class="font-semibold text-lg">Valor da Parcela</p>
               <p>2x R$ 5.000,00</p>
+            </div>
+            <div>
+              <p class="font-semibold text-lg">Número de parcelas</p>
+              <p>3x</p>
             </div>
           </div>
         </AccordionContent>

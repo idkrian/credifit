@@ -72,5 +72,4 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useStepStore } from "~/stores/steps";
 const stepStore = useStepStore();
-console.log(stepStore.currentStep);
 </script>
