@@ -19,9 +19,10 @@
     </p>
     <Slider
       v-model="modelValue"
-      :max="20000"
-      :step="1000"
+      :max="Number(employeeData?.salary) * 0.35"
+      :step="50"
       :class="cn('w-3/5', $attrs.class ?? '')"
+      @update:model-value="e => setEmployeeData(e!)"
     />
   </ClientOnly>
 </template>
@@ -30,6 +31,17 @@
 import { ref } from "vue";
 import { cn } from "@/lib/utils";
 import { Slider } from "@/components/ui/slider";
-
-const modelValue = ref([2000]);
+import { useEmployeeDataStore } from "~/stores/employeeOrder";
+const employeeDataStore = useEmployeeDataStore();
+const employeeCookie = useCookie("counter");
+const employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
+const modelValue = ref([200]);
+const setEmployeeData = (data: number[]) => {
+  modelValue.value = data;
+  employeeDataStore.setEmployee({
+    month: null,
+    plot: null,
+    loanValue: data[0],
+  });
+};
 </script>
