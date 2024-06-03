@@ -49,12 +49,13 @@
       </div>
       <button type="submit">Login</button>
     </form>
-    <Tabs default-value="account" class="w-[600px]">
-      <TabsList class="grid w-full grid-cols-2">
-        <TabsTrigger value="account"> Account </TabsTrigger>
-        <TabsTrigger value="password"> Password </TabsTrigger>
+    <Tabs default-value="account" class="w-[1000px]">
+      <TabsList class="grid w-full grid-cols-3">
+        <TabsTrigger value="loginEmployee"> Login Funcionário </TabsTrigger>
+        <TabsTrigger value="loginCompany"> Login Empresa </TabsTrigger>
+        <TabsTrigger value="registerCompany"> Registrar Empresa </TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
+      <TabsContent value="loginEmployee">
         <Card>
           <CardHeader>
             <CardTitle>Account</CardTitle>
@@ -77,7 +78,7 @@
           </CardFooter>
         </Card>
       </TabsContent>
-      <TabsContent value="password">
+      <TabsContent value="loginCompany">
         <Card>
           <CardHeader>
             <CardTitle>Password</CardTitle>
