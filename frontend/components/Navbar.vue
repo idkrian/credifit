@@ -3,7 +3,9 @@
     <div
       class="bg-[#057D88] w-full h-16 px-6 flex items-center justify-between"
     >
-      <img src="~/assets/CredifitLogo.png" alt="Logo" class="" />
+      <NuxtLink to="/Auth">
+        <img src="~/assets/CredifitLogo.png" alt="Logo" />
+      </NuxtLink>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div class="flex justify-center items-center gap-2">
