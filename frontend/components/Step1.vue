@@ -33,15 +33,16 @@ import { cn } from "@/lib/utils";
 import { Slider } from "@/components/ui/slider";
 import { useEmployeeDataStore } from "~/stores/employeeOrder";
 const employeeDataStore = useEmployeeDataStore();
-const employeeCookie = useCookie("counter");
+const employeeCookie = useCookie("employeeData");
 const employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
+
 const modelValue = ref([200]);
 const setEmployeeData = (data: number[]) => {
   modelValue.value = data;
   employeeDataStore.setEmployee({
-    month: null,
-    plot: null,
-    loanValue: data[0],
+    loanMonths: null,
+    loanPlot: null,
+    loanTotalValue: data[0],
   });
 };
 </script>

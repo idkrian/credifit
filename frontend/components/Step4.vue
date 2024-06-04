@@ -9,50 +9,74 @@
         concluídas!
       </p>
     </div>
+    <div v-if="error">{{ error }}</div>
+    <div v-if="pending">
+      <Skeleton class="h-[125px] w-[250px] rounded-xl" />
+    </div>
     <Accordion
       type="single"
       class="w-full grid grid-cols-1 gap-4 max-h-[20rem] overflow-y-auto"
       collapsible
-      :default-value="defaultValue"
+      v-else
     >
       <AccordionItem
-        v-for="item in accordionItems"
-        :key="item.value"
-        :value="item.value"
+        v-for="loan in loanData"
+        :key="loan.id"
+        :value="String(loan.id)"
       >
         <AccordionTrigger class="uppercase font-bold text-md">
           <div class="items-center justify-center align-middle">
-            <Icon :name="item.icon" color="black" class="size-5" />
-            {{ item.title }}
+            <Icon
+              :name="
+                loan.approved
+                  ? 'lets-icons:done-ring-round'
+                  : 'ph:clock-clockwise-fill'
+              "
+              :color="loan.approved ? 'green' : 'black'"
+              class="size-5"
+            />
+            Solicitação de Empréstimo {{ loan.id }}
           </div>
         </AccordionTrigger>
         <AccordionContent>
           <div
-            class="flex p-4 bg-green-300 rounded-full w-fit gap-4 items-center"
+            :class="`flex p-4 rounded-full w-fit gap-4 items-center ${
+              loan.approved ? 'bg-green-300' : 'bg-red-400'
+            }`"
           >
-            <Icon :name="item.icon" color="green" class="size-6" />
-            <p class="text-lg">Crédito Aprovado</p>
+            <Icon
+              :name="
+                loan.approved
+                  ? 'lets-icons:done-ring-round'
+                  : 'ph:clock-clockwise-fill'
+              "
+              :color="loan.approved ? 'green' : 'black'"
+              class="size-6"
+            />
+            <p class="text-lg">
+              {{ loan.approved ? "Crédito Aprovado" : "Reprovado por Score" }}
+            </p>
           </div>
           <div class="w-full grid grid-cols-2 my-6 gap-6">
             <div>
               <p class="font-semibold text-lg">Empresa</p>
-              <p>Seguros Seguradora</p>
+              <p>{{ loan.companyName }}</p>
             </div>
             <div>
               <p class="font-semibold text-lg">Próximo Vencimento</p>
-              <p>12/08/2023</p>
+              <p>{{ new Date(loan.date).toLocaleDateString() }}</p>
             </div>
             <div>
               <p class="font-semibold text-lg">Total Financiado</p>
-              <p>5.000,00</p>
+              <p>{{ loan.loanTotalValue }}</p>
             </div>
             <div>
               <p class="font-semibold text-lg">Valor da Parcela</p>
-              <p>2x R$ 5.000,00</p>
+              <p>{{ loan.loanMonths }}x de {{ loan.loanPlot }}</p>
             </div>
             <div>
               <p class="font-semibold text-lg">Número de parcelas</p>
-              <p>3x</p>
+              <p>{{ loan.loanMonths }}x</p>
             </div>
           </div>
         </AccordionContent>
@@ -68,22 +92,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const defaultValue = "item-1";
-
-const accordionItems = [
-  {
-    value: "item-1",
-    icon: "lets-icons:done-ring-round",
-    title: "SOLICITAÇÃO DE EMPRÉSTIMO 01",
-    content: "Yes. It adheres to the WAI-ARIA design pattern.",
-  },
-  {
-    value: "item-2",
-    icon: "ph:clock-clockwise-fill",
-    title: "EMPRÉSTIMO CORRENTE 01",
-    content:
-      "Yes. It's unstyled by default, giving you freedom over the look and feel.",
-  },
-];
+import { Skeleton } from "@/components/ui/skeleton";
+interface LoanProp {
+  id: number;
+  companyName: string;
+  loanPlot: number;
+  loanTotalValue: number;
+  loanMonths: number;
+  date: Date;
+  approved: boolean;
+  salary: number;
+}
+const { data, pending, error } = await useFetch<LoanProp[]>(
+  "http://localhost:3001/loan"
+);
+const loanData = data.value;
 </script>

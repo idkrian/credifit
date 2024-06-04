@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { PrismaService } from "src/prisma.service";
+import { AuthCompanyDto } from "./dto/auth-company.dto";
 
 @Injectable()
 export class CompanyService {
@@ -29,11 +30,24 @@ export class CompanyService {
       throw new NotFoundException(["o id deve ser um número!"]);
     }
   }
+
+  async auth(data: AuthCompanyDto) {
+    const company = await this.prisma.company.findUniqueOrThrow({
+      where: {
+        email: data.email,
+        password: data.password,
+      },
+    });
+    delete company.password;
+    return company;
+  }
+
   async create(data: CreateCompanyDto) {
     await this.isUniqueEmail(data);
     await this.isUniqueCpf(data);
-
-    return await this.prisma.company.create({ data });
+    const company = await this.prisma.company.create({ data });
+    delete company.password;
+    return company;
   }
 
   async findAll() {
@@ -42,7 +56,7 @@ export class CompanyService {
 
   async findOne(id: number) {
     await this.validateId(id);
-    const company = await this.prisma.company.findUnique({ where: { id } });
+    const company = await this.prisma.company.findUnique({ where: { id }, include: { employees: true } });
     if (!company) {
       throw new NotFoundException(["Este id não foi encontrado!"]);
     }

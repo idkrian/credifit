@@ -3,32 +3,37 @@
     <div
       class="bg-[#057D88] w-full h-16 px-6 flex items-center justify-between"
     >
-      <NuxtLink to="/Auth">
+      <NuxtLink to="/">
         <img src="~/assets/CredifitLogo.png" alt="Logo" />
       </NuxtLink>
-      <DropdownMenu>
+      <DropdownMenu v-if="employeeData !== undefined">
         <DropdownMenuTrigger>
           <div class="flex justify-center items-center gap-2">
             <Icon name="iconamoon:profile" color="white" class="size-6" />
 
-            <p class="text-white font-bold">Diego Viana</p>
+            <p class="text-white font-bold">{{ employeeData?.name! }}</p>
             <Icon name="mingcute:down-fill" color="white" class="size-5" />
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuContent v-if="employeeData?.hasOwnProperty('companyName')">
+          <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
+          <DropdownMenuItem>Perfil</DropdownMenuItem>
+          <DropdownMenuItem>Criar perfil de Funcionário</DropdownMenuItem>
+          <DropdownMenuItem @click="leaveAccount">Sair</DropdownMenuItem>
+        </DropdownMenuContent>
+        <DropdownMenuContent v-else>
+          <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Perfil</DropdownMenuItem>
+          <DropdownMenuItem @click="leaveAccount">Sair</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
   </ClientOnly>
 </template>
 
-<script>
+<script setup lang="ts">
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +42,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-export default {
-  name: "Navbar",
+const employeeCookie = useCookie("employeeData");
+const router = useRouter();
+
+const employeeData = ref<any>(
+  employeeCookie.value
+    ? JSON.parse(JSON.stringify(employeeCookie.value))
+    : undefined
+);
+
+watch(employeeCookie, (newValue) => {
+  employeeData.value = newValue
+    ? JSON.parse(JSON.stringify(newValue))
+    : undefined;
+});
+
+const leaveAccount = () => {
+  employeeCookie.value = undefined;
+  employeeData.value = undefined;
+  router.push({ path: "/" });
 };
 </script>

@@ -1,7 +1,7 @@
 interface EmployeeProps {
-  month?: number | null;
-  loanValue: number;
-  plot: number | null;
+  loanMonths?: number | null;
+  loanTotalValue: number;
+  loanPlot: number | null;
 }
 interface EmployeeState {
   employee: EmployeeProps | null;

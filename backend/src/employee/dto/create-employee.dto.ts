@@ -1,4 +1,5 @@
-import { IsString, IsDecimal, IsEmail, IsEmpty, Max, Min, IsNotEmpty, Length, IsNumber } from "class-validator";
+import { IsString, IsEmail, IsNotEmpty, Length, IsNumber } from "class-validator";
+import { CreateLoanDto } from "src/loan/dto/create-loan.dto";
 
 export class CreateEmployeeDto {
   @IsString({ message: "O campo deve ser uma string!" })
@@ -19,4 +20,6 @@ export class CreateEmployeeDto {
   @IsNotEmpty({ message: "O campo salário é obrigatório!" })
   @IsNumber({}, { message: "O campo salário deve ser numérico!" })
   salary: number;
+  companyId: number;
+  // loans?: CreateLoanDto[];
 }

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
 import { PrismaService } from "src/prisma.service";
+import { AuthEmployeeDto } from "./dto/auth-employee.dto";
 
 @Injectable()
 export class EmployeeService {
@@ -30,11 +31,36 @@ export class EmployeeService {
     }
   }
 
+  async auth(data: AuthEmployeeDto) {
+    const employee = await this.prisma.employee.findUniqueOrThrow({
+      where: {
+        email: data.email,
+        password: data.password,
+      },
+    });
+    delete employee.password;
+    return employee;
+  }
   async create(data: CreateEmployeeDto) {
     await this.isUniqueEmail(data);
     await this.isUniqueCpf(data);
 
-    return await this.prisma.employee.create({ data });
+    const employee = await this.prisma.employee.create({
+      data: {
+        name: data.name,
+        cpf: data.cpf,
+        email: data.email,
+        password: data.password,
+        salary: data.salary,
+        company: {
+          connect: {
+            id: data.companyId,
+          },
+        },
+      },
+    });
+    delete employee.password;
+    return employee;
   }
 
   async findAll() {
@@ -43,7 +69,7 @@ export class EmployeeService {
 
   async findOne(id: number) {
     await this.validateId(id);
-    const employee = await this.prisma.employee.findUnique({ where: { id } });
+    const employee = await this.prisma.employee.findUnique({ where: { id }, include: { loans: true } });
     if (!employee) {
       throw new NotFoundException(["Este id não foi encontrado!"]);
     }

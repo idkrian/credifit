@@ -14,7 +14,7 @@
     <p
       class="bg-[#EAEDED] py-2 px-4 rounded-2xl text-[#004F56] text-3xl font-semibold"
     >
-      R$ {{ Number(employeeDataStore.employee?.loanValue) }}
+      R$ {{ Number(employeeDataStore.employee?.loanTotalValue) }}
     </p>
     <ToggleGroup type="single" class="w-full">
       <div class="w-full grid grid-cols-2 gap-2">
@@ -38,7 +38,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useEmployeeDataStore } from "~/stores/employeeOrder";
 const employeeDataStore = useEmployeeDataStore();
 const employeeLoanValue = Number(
-  employeeDataStore.employee!.loanValue.toFixed(2)
+  employeeDataStore.employee!.loanTotalValue.toFixed(2)
 );
 const plots = [
   { months: 1, plot: employeeLoanValue },
@@ -46,13 +46,12 @@ const plots = [
   { months: 3, plot: employeeLoanValue / 3 },
   { months: 4, plot: employeeLoanValue / 4 },
 ];
-console.log(employeeDataStore);
 
 const setEmployeeData = (month: number, plot: number) => {
   employeeDataStore.setEmployee({
-    month,
-    plot,
-    loanValue: employeeLoanValue,
+    loanMonths: month,
+    loanPlot: plot,
+    loanTotalValue: employeeLoanValue,
   });
 };
 </script>

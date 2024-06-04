@@ -14,7 +14,7 @@
             o seu negócio. Somos a Credifit, a plataforma ideal para você
             conseguir crédito de forma simples, rápida e segura.
           </p>
-          <DropdownMenu>
+          <DropdownMenu v-if="employeeData == undefined">
             <DropdownMenuTrigger
               class="bg-[#057D88] w-fit text-white px-8 py-3 rounded-xl"
               >Login
@@ -23,11 +23,18 @@
               <NuxtLink to="/CompanyAuth" class="cursor-pointer">
                 <DropdownMenuItem>Empresa</DropdownMenuItem>
               </NuxtLink>
-              <NuxtLink to="/CompanyAuth" class="cursor-pointer">
+              <NuxtLink to="/EmployeeAuth" class="cursor-pointer">
                 <DropdownMenuItem>Funcionário</DropdownMenuItem>
               </NuxtLink>
             </DropdownMenuContent>
           </DropdownMenu>
+          <NuxtLink
+            to="/PayrollLinked"
+            v-else
+            class="bg-[#057D88] w-fit text-white px-8 py-3 rounded-xl"
+          >
+            Solicitar Crédito
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -39,8 +46,19 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+const employeeCookie = useCookie("employeeData");
+
+const employeeData = ref<any>(
+  employeeCookie.value
+    ? JSON.parse(JSON.stringify(employeeCookie.value))
+    : undefined
+);
+
+watch(employeeCookie, (newValue) => {
+  employeeData.value = newValue
+    ? JSON.parse(JSON.stringify(newValue))
+    : undefined;
+});
 </script>
