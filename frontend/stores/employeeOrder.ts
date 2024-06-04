@@ -15,7 +15,11 @@ export const useEmployeeDataStore = defineStore("employeeDataStore", {
       this.employee = employeeData;
     },
     clearEmployee() {
-      this.employee = null;
+      this.employee = {
+        loanMonths: 0,
+        loanPlot: 0,
+        loanTotalValue: 0,
+      };
     },
   },
 });

@@ -69,7 +69,6 @@ const formData = ref({
   email: "",
   password: "",
 });
-const router = useRouter();
 
 const submitForm = async () => {
   try {
@@ -79,7 +78,6 @@ const submitForm = async () => {
     });
     const employeeCookie = useCookie("employeeData");
     employeeCookie.value = JSON.stringify(employee);
-    // router.push("/PayrollLinked");
     navigateTo({ path: "/" });
   } catch (error) {
     console.log(error);

@@ -32,7 +32,7 @@
                   ? 'lets-icons:done-ring-round'
                   : 'ph:clock-clockwise-fill'
               "
-              :color="loan.approved ? 'green' : 'black'"
+              :color="loan.approved ? 'green' : 'red'"
               class="size-5"
             />
             Solicitação de Empréstimo {{ loan.id }}
@@ -93,18 +93,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
-interface LoanProp {
-  id: number;
-  companyName: string;
-  loanPlot: number;
-  loanTotalValue: number;
-  loanMonths: number;
-  date: Date;
-  approved: boolean;
-  salary: number;
-}
-const { data, pending, error } = await useFetch<LoanProp[]>(
-  "http://localhost:3001/loan"
+import type { EmployeeProp } from "../helpers/interfaces";
+const employeeCookie = useCookie("employeeData");
+const employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
+
+const { data, pending, error } = await useFetch<EmployeeProp>(
+  `http://localhost:3001/employee/${employeeData.id}`
 );
-const loanData = data.value;
+const loanData = data.value!.loans;
 </script>

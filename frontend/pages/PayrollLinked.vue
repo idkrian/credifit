@@ -71,6 +71,7 @@
             </button>
             <button
               class="bg-[#057D88] w-56 px-6 py-4 rounded-full text-white font-bold"
+              :disabled="stepStore.currentStep === 1 && employeeDataStore.employee?.loanPlot! == null"
               @click="
                 stepStore.currentStep === 2
                   ? submitLoan()
@@ -117,6 +118,15 @@ onMounted(() => {
   }
 });
 const employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
+let step2Active = ref(0);
+watch(employeeDataStore, () => {
+  step2Active.value = employeeDataStore.employee?.loanPlot!;
+});
+watch(stepStore, () => {
+  if (stepStore.currentStep === 0) {
+    employeeDataStore.clearEmployee();
+  }
+});
 
 const submitLoan = async () => {
   const loanData = {
@@ -124,6 +134,7 @@ const submitLoan = async () => {
     salary: employeeData.salary,
     companyName: "Seguros Securitizadora",
     date: new Date(),
+    employeeId: employeeData.id,
   };
   try {
     await $fetch("http://localhost:3001/loan", {

@@ -141,7 +141,6 @@ const formData = ref({
   email: "",
   password: "",
 });
-const router = useRouter();
 const employeeCookie = useCookie("employeeData");
 let employeeData: any;
 if (employeeCookie.value !== undefined) {
@@ -150,7 +149,7 @@ if (employeeCookie.value !== undefined) {
 
 const submitForm = async () => {
   try {
-    const company = await $fetch("http://localhost:3001/employee", {
+    await $fetch("http://localhost:3001/employee", {
       method: "POST",
       body: {
         ...formData.value,

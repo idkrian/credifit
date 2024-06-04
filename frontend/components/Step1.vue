@@ -45,4 +45,7 @@ const setEmployeeData = (data: number[]) => {
     loanTotalValue: data[0],
   });
 };
+onMounted(() => {
+  setEmployeeData(modelValue.value);
+});
 </script>

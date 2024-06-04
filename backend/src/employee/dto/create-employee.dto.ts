@@ -21,5 +21,5 @@ export class CreateEmployeeDto {
   @IsNumber({}, { message: "O campo salário deve ser numérico!" })
   salary: number;
   companyId: number;
-  // loans?: CreateLoanDto[];
+  loans?: CreateLoanDto[];
 }
