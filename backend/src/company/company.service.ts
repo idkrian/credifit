@@ -56,7 +56,7 @@ export class CompanyService {
 
   async findOne(id: number) {
     await this.validateId(id);
-    const company = await this.prisma.company.findUnique({ where: { id } });
+    const company = await this.prisma.company.findUnique({ where: { id }, include: { employees: true } });
     if (!company) {
       throw new NotFoundException(["Este id não foi encontrado!"]);
     }

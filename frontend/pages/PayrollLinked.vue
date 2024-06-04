@@ -33,14 +33,23 @@
               solicitar um empréstimo.
             </p>
             <p class="text-center text-md">
-              Faça Login como funcionário para ter acesso a página.
+              Faça login ou registre um novo funcionário para ter acesso a
+              página.
             </p>
-            <NuxtLink
-              to="/EmployeeAuth"
-              class="bg-[#057D88] w-56 px-6 py-3 rounded-full text-white font-semibold text-center"
-            >
-              Fazer Login como Funcionário
-            </NuxtLink>
+            <div class="flex gap-4">
+              <NuxtLink
+                to="/EmployeeAuth"
+                class="border-2 border-[#057D88] text-[#057D88] w-56 px-6 py-3 rounded-full font-semibold text-center"
+              >
+                Autenticar Funcionário
+              </NuxtLink>
+              <NuxtLink
+                to="/EmployeeCreation"
+                class="bg-[#057D88] w-56 px-6 py-3 rounded-full text-white font-semibold text-center"
+              >
+                Registrar Funcionário
+              </NuxtLink>
+            </div>
           </div>
         </div>
         <div
@@ -108,7 +117,6 @@ onMounted(() => {
   }
 });
 const employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
-console.log(employeeData.hasOwnProperty("companyName"));
 
 const submitLoan = async () => {
   const loanData = {

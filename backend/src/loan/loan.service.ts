@@ -39,7 +39,18 @@ export class LoanService {
         ),
       );
       const approved = this.getApprovalStatus(loan.salary, data.score);
-      return await this.prisma.loan.create({ data: { ...loan, approved } });
+      return await this.prisma.loan.create({
+        data: {
+          companyName: loan.companyName,
+          loanPlot: loan.loanPlot,
+          loanTotalValue: loan.loanTotalValue,
+          loanMonths: loan.loanMonths,
+          date: loan.date,
+          approved: approved,
+          salary: loan.salary,
+          employee: { connect: { id: loan.employeeId } },
+        },
+      });
     } catch (error) {
       console.log(error);
     }

@@ -15,18 +15,18 @@
             <Icon name="mingcute:down-fill" color="white" class="size-5" />
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent v-if="employeeData.hasOwnProperty('companyName')">
+        <DropdownMenuContent v-if="employeeData?.hasOwnProperty('companyName')">
           <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Perfil</DropdownMenuItem>
           <DropdownMenuItem>Criar perfil de Funcionário</DropdownMenuItem>
-          <DropdownMenuItem>Sair</DropdownMenuItem>
+          <DropdownMenuItem @click="leaveAccount">Sair</DropdownMenuItem>
         </DropdownMenuContent>
         <DropdownMenuContent v-else>
           <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Perfil</DropdownMenuItem>
-          <DropdownMenuItem>Sair</DropdownMenuItem>
+          <DropdownMenuItem @click="leaveAccount">Sair</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
@@ -43,9 +43,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 const employeeCookie = useCookie("employeeData");
+const router = useRouter();
 
-let employeeData: any;
-if (employeeCookie.value !== undefined) {
-  employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
-}
+const employeeData = ref<any>(
+  employeeCookie.value
+    ? JSON.parse(JSON.stringify(employeeCookie.value))
+    : undefined
+);
+
+watch(employeeCookie, (newValue) => {
+  employeeData.value = newValue
+    ? JSON.parse(JSON.stringify(newValue))
+    : undefined;
+});
+
+const leaveAccount = () => {
+  employeeCookie.value = undefined;
+  employeeData.value = undefined;
+  router.push({ path: "/" });
+};
 </script>

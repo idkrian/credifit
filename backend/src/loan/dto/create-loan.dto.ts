@@ -6,4 +6,5 @@ export class CreateLoanDto {
   date: Date;
   approved: boolean;
   salary: number;
+  employeeId: number;
 }

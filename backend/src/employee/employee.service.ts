@@ -45,7 +45,20 @@ export class EmployeeService {
     await this.isUniqueEmail(data);
     await this.isUniqueCpf(data);
 
-    const employee = await this.prisma.employee.create({ data });
+    const employee = await this.prisma.employee.create({
+      data: {
+        name: data.name,
+        cpf: data.cpf,
+        email: data.email,
+        password: data.password,
+        salary: data.salary,
+        company: {
+          connect: {
+            id: data.companyId,
+          },
+        },
+      },
+    });
     delete employee.password;
     return employee;
   }
@@ -56,7 +69,7 @@ export class EmployeeService {
 
   async findOne(id: number) {
     await this.validateId(id);
-    const employee = await this.prisma.employee.findUnique({ where: { id } });
+    const employee = await this.prisma.employee.findUnique({ where: { id }, include: { loans: true } });
     if (!employee) {
       throw new NotFoundException(["Este id não foi encontrado!"]);
     }

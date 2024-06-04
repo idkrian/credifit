@@ -13,23 +13,27 @@ datasource db {
   url      = "postgresql://postgres:123@localhost:5432/CredifitDB"
 }
 
-model Employee {
-  id       Int     @id @default(autoincrement())
-  name     String
-  cpf      String  @unique
-  email    String  @unique
-  password String
-  salary   Decimal
-}
-
 model Company {
-  id          Int    @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   companyName String
   name        String
-  cnpj        String @unique
-  email       String @unique
-  cpf         String @unique
+  cnpj        String     @unique
+  email       String     @unique
+  cpf         String     @unique
   password    String
+  employees   Employee[]
+}
+
+model Employee {
+  id        Int     @id @default(autoincrement())
+  name      String
+  cpf       String  @unique
+  email     String  @unique
+  password  String
+  salary    Decimal
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId Int
+  loans     Loan[]
 }
 
 model Loan {
@@ -41,4 +45,6 @@ model Loan {
   date           DateTime
   salary         Decimal
   approved       Boolean
+  employeeId     Int
+  employee       Employee @relation(fields: [employeeId], references: [id])
 }

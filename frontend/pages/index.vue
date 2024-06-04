@@ -50,8 +50,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 const employeeCookie = useCookie("employeeData");
 
-let employeeData: any;
-if (employeeCookie.value !== undefined) {
-  employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
-}
+const employeeData = ref<any>(
+  employeeCookie.value
+    ? JSON.parse(JSON.stringify(employeeCookie.value))
+    : undefined
+);
+
+watch(employeeCookie, (newValue) => {
+  employeeData.value = newValue
+    ? JSON.parse(JSON.stringify(newValue))
+    : undefined;
+});
 </script>

@@ -79,7 +79,8 @@ const submitForm = async () => {
     });
     const employeeCookie = useCookie("employeeData");
     employeeCookie.value = JSON.stringify(employee);
-    router.push("/PayrollLinked");
+    // router.push("/PayrollLinked");
+    navigateTo({ path: "/" });
   } catch (error) {
     console.log(error);
   }
