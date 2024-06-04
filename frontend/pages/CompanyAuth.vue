@@ -22,17 +22,15 @@
                 Digite suas informações para registrar ou logar com sua empresa
               </p>
             </div>
-            <form @submit.prevent="submitForm">
-              <Tabs default-value="loginCompany">
-                <TabsList class="grid w-full grid-cols-2">
-                  <TabsTrigger value="loginCompany">
-                    Login Empresa
-                  </TabsTrigger>
-                  <TabsTrigger value="registerCompany">
-                    Registrar Empresa
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="loginCompany">
+            <Tabs default-value="loginCompany">
+              <TabsList class="grid w-full grid-cols-2">
+                <TabsTrigger value="loginCompany"> Login Empresa </TabsTrigger>
+                <TabsTrigger value="registerCompany">
+                  Registrar Empresa
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="loginCompany">
+                <form @submit.prevent="loginForm">
                   <div class="flex -mx-3">
                     <div class="w-full px-3 mb-5">
                       <label for="" class="text-xs font-semibold px-1"
@@ -74,8 +72,10 @@
                       </button>
                     </div>
                   </div>
-                </TabsContent>
-                <TabsContent value="registerCompany">
+                </form>
+              </TabsContent>
+              <TabsContent value="registerCompany">
+                <form @submit.prevent="submitForm">
                   <div class="flex -mx-3">
                     <div class="w-full px-3 mb-5">
                       <label for="" class="text-xs font-semibold px-1"
@@ -174,14 +174,15 @@
                     <div class="w-full px-3 mb-5">
                       <button
                         class="block w-full max-w-xs mx-auto bg-[#057D88] hover:bg-[#045e66] text-white rounded-lg px-3 py-3 font-semibold"
+                        type="submit"
                       >
                         REGISTRAR
                       </button>
                     </div>
                   </div>
-                </TabsContent>
-              </Tabs>
-            </form>
+                </form>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </div>
@@ -200,14 +201,27 @@ const formData = ref({
 });
 const router = useRouter();
 
+const loginForm = async () => {
+  try {
+    const company = await $fetch("http://localhost:3001/company/auth", {
+      method: "POST",
+      body: { email: formData.value.email, password: formData.value.password },
+    });
+    const employeeCookie = useCookie("employeeData");
+    employeeCookie.value = JSON.stringify(company);
+    router.push("/");
+  } catch (error) {
+    console.log(error);
+  }
+};
 const submitForm = async () => {
   try {
-    await $fetch("http://localhost:3001/company", {
+    const company = await $fetch("http://localhost:3001/company", {
       method: "POST",
       body: formData.value,
     });
-    // const employeeCookie = useCookie("counter");
-    // employeeCookie.value = JSON.stringify(employee);
+    const employeeCookie = useCookie("employeeData");
+    employeeCookie.value = JSON.stringify(company);
     router.push("/");
   } catch (error) {
     console.log(error);

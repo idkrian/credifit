@@ -2,10 +2,16 @@ import { Controller, Get, Post, Body, Param, Delete, Put } from "@nestjs/common"
 import { CompanyService } from "./company.service";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
+import { AuthCompanyDto } from "./dto/auth-company.dto";
 
 @Controller("company")
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
+
+  @Post("/auth")
+  auth(@Body() authCompanyDto: AuthCompanyDto) {
+    return this.companyService.auth(authCompanyDto);
+  }
 
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto) {

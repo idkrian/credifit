@@ -66,25 +66,20 @@
 
 <script setup lang="ts">
 const formData = ref({
-  name: "",
-  companyName: "",
-  cpf: "",
-  cnpj: "",
   email: "",
   password: "",
 });
 const router = useRouter();
 
 const submitForm = async () => {
-  console.log(formData.value);
   try {
-    await $fetch("http://localhost:3001/company", {
+    const employee = await $fetch("http://localhost:3001/employee/auth", {
       method: "POST",
       body: formData.value,
     });
-    // const employeeCookie = useCookie("counter");
-    // employeeCookie.value = JSON.stringify(employee);
-    router.push("/");
+    const employeeCookie = useCookie("employeeData");
+    employeeCookie.value = JSON.stringify(employee);
+    router.push("/PayrollLinked");
   } catch (error) {
     console.log(error);
   }

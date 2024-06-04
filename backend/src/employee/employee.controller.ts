@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, ValidationPipe, UsePipes, P
 import { EmployeeService } from "./employee.service";
 import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
+import { AuthEmployeeDto } from "./dto/auth-employee.dto";
 
 @Controller("employee")
 export class EmployeeController {
@@ -18,6 +19,10 @@ export class EmployeeController {
     return this.employeeService.findAll();
   }
 
+  @Post("/auth")
+  auth(@Body() authEmployeeDto: AuthEmployeeDto) {
+    return this.employeeService.auth(authEmployeeDto);
+  }
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.employeeService.findOne(+id);

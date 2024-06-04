@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
 import { PrismaService } from "src/prisma.service";
+import { AuthEmployeeDto } from "./dto/auth-employee.dto";
 
 @Injectable()
 export class EmployeeService {
@@ -30,11 +31,23 @@ export class EmployeeService {
     }
   }
 
+  async auth(data: AuthEmployeeDto) {
+    const employee = await this.prisma.employee.findUniqueOrThrow({
+      where: {
+        email: data.email,
+        password: data.password,
+      },
+    });
+    delete employee.password;
+    return employee;
+  }
   async create(data: CreateEmployeeDto) {
     await this.isUniqueEmail(data);
     await this.isUniqueCpf(data);
 
-    return await this.prisma.employee.create({ data });
+    const employee = await this.prisma.employee.create({ data });
+    delete employee.password;
+    return employee;
   }
 
   async findAll() {

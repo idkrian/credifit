@@ -15,15 +15,17 @@
     <div class="w-full grid grid-cols-2 my-6 gap-6">
       <div>
         <p class="font-semibold text-lg">Valor a Creditar</p>
-        <p>R${{ employee!.loanValue }}</p>
+        <p>R${{ employee!.loanTotalValue }}</p>
       </div>
       <div>
         <p class="font-semibold text-lg">Valor a financiar</p>
-        <p>R${{ employee!.loanValue }}</p>
+        <p>R${{ employee!.loanTotalValue }}</p>
       </div>
       <div>
         <p class="font-semibold text-lg">Parcelamento</p>
-        <p>{{ employee!.month }}x R$ {{ employee!.plot!.toFixed(2) }}</p>
+        <p>
+          {{ employee!.loanMonths }}x R$ {{ employee!.loanPlot!.toFixed(2) }}
+        </p>
       </div>
     </div>
   </ClientOnly>
