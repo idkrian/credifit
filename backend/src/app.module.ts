@@ -10,3 +10,5 @@ import { LoanModule } from "./loan/loan.module";
   providers: [AppService, PrismaService],
 })
 export class AppModule {}
+
+export { PrismaService };
