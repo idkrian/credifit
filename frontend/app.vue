@@ -1,5 +1,10 @@
 <template>
-  <div class="h-screen w-screen flex justify-center align-middle items-center">
-    App
-  </div>
+  <Toaster />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+import Toaster from "@/components/ui/toast/Toaster.vue";
+</script>
