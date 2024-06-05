@@ -7,13 +7,13 @@
 </template>
 
 <script setup>
-import Step2 from "./Step2.vue";
-import Step1 from "./Step1.vue";
-import Step3 from "./Step3.vue";
-import Step4 from "./Step4.vue";
 import { useStepStore } from "~/stores/steps";
+import LoanTotalValue from "./LoanRequestSteps/LoanTotalValue";
+import LoanParcels from "./LoanRequestSteps/LoanParcels";
+import LoanResume from "./LoanRequestSteps/LoanResume";
+import EmployeeLoans from "./LoanRequestSteps/EmployeeLoans";
 
-const steps = [Step1, Step2, Step3, Step4];
+const steps = [LoanTotalValue, LoanParcels, LoanResume, EmployeeLoans];
 const stepStore = useStepStore();
 </script>
 

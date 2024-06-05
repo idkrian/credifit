@@ -26,6 +26,9 @@
           <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Perfil</DropdownMenuItem>
+          <NuxtLink to="/Loans">
+            <DropdownMenuItem> Empréstimos </DropdownMenuItem>
+          </NuxtLink>
           <DropdownMenuItem @click="leaveAccount">Sair</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

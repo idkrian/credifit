@@ -5,7 +5,7 @@
     </p>
     <div class="flex bg-[#FFE5D5] p-4 rounded-xl">
       <div class="pr-4">
-        <img src="../assets/betina.png" alt="betina" class="w-28" />
+        <img src="../../assets/betina.png" alt="betina" class="w-28" />
       </div>
       <p class="text-xl">
         Pronto! Agora você já pode solicitar o empréstimo e recebê-lo na sua

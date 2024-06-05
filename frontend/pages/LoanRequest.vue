@@ -108,10 +108,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useStepStore } from "~/stores/steps";
 import { useEmployeeDataStore } from "~/stores/employeeOrder";
+import { useToast } from "~/components/ui/toast";
 const stepStore = useStepStore();
 const employeeDataStore = useEmployeeDataStore();
 const employeeCookie = useCookie("employeeData");
 const router = useRouter();
+const { toast } = useToast();
+
 onMounted(() => {
   if (employeeCookie.value === undefined) {
     router.push("/");
@@ -140,6 +143,17 @@ const submitLoan = async () => {
     await $fetch("http://localhost:3001/loan", {
       method: "POST",
       body: loanData,
+      onResponseError({ response }) {
+        console.error(
+          "Erro na resposta:",
+          response._data.message || "Erro desconhecido"
+        );
+        toast({
+          title: "Erro!",
+          description: response._data.message || "Erro desconhecido",
+          variant: "destructive",
+        });
+      },
     });
     stepStore.incrementStep();
   } catch (error) {

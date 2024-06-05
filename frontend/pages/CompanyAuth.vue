@@ -9,11 +9,9 @@
           <div
             class="hidden md:block w-1/2 bg-[#057D88] py-10 px-10 justify-center"
           >
-            <img
-              src="../assets/img-radio.svg"
-              alt=""
-              class="flex justify-center items-center my-auto"
-            />
+            <div class="flex justify-center items-center my-auto h-full">
+              <img src="../assets/img-radio.svg" alt="" />
+            </div>
           </div>
           <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
             <div class="text-center mb-10">
@@ -191,6 +189,10 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from "~/components/ui/toast";
+
+const router = useRouter();
+const { toast } = useToast();
 const formData = ref({
   name: "",
   companyName: "",
@@ -199,13 +201,23 @@ const formData = ref({
   email: "",
   password: "",
 });
-const router = useRouter();
 
 const loginForm = async () => {
   try {
     const company = await $fetch("http://localhost:3001/company/auth", {
       method: "POST",
       body: { email: formData.value.email, password: formData.value.password },
+      onResponseError({ response }) {
+        console.error(
+          "Erro na resposta:",
+          response._data.message || "Erro desconhecido"
+        );
+        toast({
+          title: "Erro!",
+          description: response._data.message || "Erro desconhecido",
+          variant: "destructive",
+        });
+      },
     });
     const employeeCookie = useCookie("employeeData");
     employeeCookie.value = JSON.stringify(company);
@@ -219,6 +231,17 @@ const submitForm = async () => {
     const company = await $fetch("http://localhost:3001/company", {
       method: "POST",
       body: formData.value,
+      onResponseError({ response }) {
+        console.error(
+          "Erro na resposta:",
+          response._data.message || "Erro desconhecido"
+        );
+        toast({
+          title: "Erro!",
+          description: response._data.message || "Erro desconhecido",
+          variant: "destructive",
+        });
+      },
     });
     const employeeCookie = useCookie("employeeData");
     employeeCookie.value = JSON.stringify(company);

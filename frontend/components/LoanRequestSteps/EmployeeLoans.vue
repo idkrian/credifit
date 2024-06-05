@@ -2,7 +2,7 @@
   <ClientOnly>
     <div class="flex bg-[#FFE5D5] p-4 rounded-xl">
       <div class="pr-4">
-        <img src="../assets/betina.png" alt="betina" class="w-12" />
+        <img src="../../assets/betina.png" alt="betina" class="w-12" />
       </div>
       <p class="text-xl">
         Você solicitou seu empréstimo! Agora aguarde as etapas de análises serem

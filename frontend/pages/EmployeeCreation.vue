@@ -28,11 +28,9 @@
           <div
             class="hidden md:block w-1/2 bg-[#057D88] py-10 px-10 justify-center"
           >
-            <img
-              src="../assets/img-radio.svg"
-              alt=""
-              class="flex justify-center items-center my-auto"
-            />
+            <div class="flex justify-center items-center my-auto h-full">
+              <img src="../assets/img-radio.svg" alt="" />
+            </div>
           </div>
           <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
             <div class="text-center mb-10">
@@ -134,6 +132,8 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from "~/components/ui/toast";
+
 const formData = ref({
   name: "",
   cpf: "",
@@ -142,6 +142,8 @@ const formData = ref({
   password: "",
 });
 const employeeCookie = useCookie("employeeData");
+const { toast } = useToast();
+
 let employeeData: any;
 if (employeeCookie.value !== undefined) {
   employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
@@ -161,6 +163,12 @@ const submitForm = async () => {
           "Erro na resposta:",
           response._data.message || "Erro desconhecido"
         );
+        toast({
+          title: "Erro!",
+          description:
+            response._data.message.map((i: string) => i) || "Erro desconhecido",
+          variant: "destructive",
+        });
       },
     });
     navigateTo({ path: "/" });

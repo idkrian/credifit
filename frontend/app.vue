@@ -1,11 +1,10 @@
 <template>
+  <Toaster />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
 
-<script>
-export default {
-  name: "App",
-};
+<script setup lang="ts">
+import Toaster from "@/components/ui/toast/Toaster.vue";
 </script>

@@ -5,7 +5,7 @@
     </p>
     <div class="flex bg-[#FFE5D5] p-4 rounded-xl">
       <div class="pr-4">
-        <img src="../assets/betina.png" alt="betina" class="w-24" />
+        <img src="../../assets/betina.png" alt="betina" class="w-24" />
       </div>
       <p class="text-xl">
         Você possui saldo para Crédito Consignado pela empresa Seguros
