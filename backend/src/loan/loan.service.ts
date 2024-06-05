@@ -1,9 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { CreateLoanDto } from "./dto/create-loan.dto";
-import { UpdateLoanDto } from "./dto/update-loan.dto";
-import { PrismaService } from "src/prisma.service";
+import { PrismaService } from "../app.module";
 import { HttpService } from "@nestjs/axios";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import { catchError, firstValueFrom } from "rxjs";
 interface Prop {
   score: number;
@@ -54,8 +53,6 @@ export class LoanService {
     } catch (error) {
       console.log(error);
     }
-
-    // this.getApprovalStatus(data.salary, score)
   }
 
   async findAll() {
@@ -64,13 +61,5 @@ export class LoanService {
 
   async findOne(id: number) {
     return await this.prisma.loan.findFirst({ where: { id } });
-  }
-
-  async update(id: number, updateLoanDto: UpdateLoanDto) {
-    return `This action updates a #${id} loan`;
-  }
-
-  async remove(id: number) {
-    return `This action removes a #${id} loan`;
   }
 }
