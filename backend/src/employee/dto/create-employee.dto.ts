@@ -20,7 +20,6 @@ export class CreateEmployeeDto {
   password?: string;
 
   @IsNotEmpty({ message: "O campo salário é obrigatório!" })
-  // @IsNumber({}, { message: "O campo salário deve ser numérico!" })
   salary: Prisma.Decimal;
   companyId: number;
   loans?: CreateLoanDto[];

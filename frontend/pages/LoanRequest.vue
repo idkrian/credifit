@@ -70,7 +70,7 @@
               Voltar
             </button>
             <button
-              class="bg-[#057D88] w-56 px-6 py-4 rounded-full text-white font-bold"
+              :class="`w-56 px-6 py-4 rounded-full text-white font-bold ${stepStore.currentStep === 1 && employeeDataStore.employee?.loanPlot! == null ? 'bg-slate-300': 'bg-[#057D88]'}`"
               :disabled="stepStore.currentStep === 1 && employeeDataStore.employee?.loanPlot! == null"
               @click="
                 stepStore.currentStep === 2
