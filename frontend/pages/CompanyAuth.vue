@@ -83,7 +83,7 @@
                         <input
                           type="text"
                           class="w-full pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-[#057D88]"
-                          placeholder="Seguros Seguratora"
+                          placeholder="João Pedro Silva"
                           v-model="formData.name"
                           required
                         />
@@ -129,7 +129,7 @@
                         <input
                           type="text"
                           class="w-full pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-[#057D88]"
-                          placeholder="Seguros Seguratora"
+                          placeholder="Seguros Seguradora"
                           v-model="formData.companyName"
                           required
                         />
