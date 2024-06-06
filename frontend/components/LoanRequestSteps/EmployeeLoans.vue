@@ -93,7 +93,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { EmployeeProp } from "../helpers/interfaces";
+import type { EmployeeProp } from "../../helpers/interfaces";
 const employeeCookie = useCookie("employeeData");
 const employeeData = JSON.parse(JSON.stringify(employeeCookie.value!));
 
