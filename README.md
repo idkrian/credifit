@@ -27,7 +27,6 @@
    ```sh
    git clone https://github.com/idkrian/credifit.git
    ```
-2. Install the latest version of NodeJS
    
 Backend:
 1. Install PostgreSQL
@@ -42,7 +41,7 @@ Backend:
    ```
 4. Install Prisma CLI
    ```sh
-   npm install @prisma/cli --save-dev
+    yarn add prisma --dev
    ```
 5. Run Prisma migrations
    ```sh
